@@ -1,16 +1,25 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/17 08:23:00 by iel-moha          #+#    #+#             */
+/*   Updated: 2022/03/17 09:57:03 by iel-moha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pipex.h"
 
 int main(int ac, char **av, char **env)
 {
-	if (ac == 5)
-	{
+	//if (ac == 2)
+	//{
 		int fd[2];
 		pid_t pid;
 		char cmd[] = "/bin/ls";
-		char *argVec[] = {"ls", "-l",NULL};
+		char **argVec = ft_split(av[1], ' ');
 		char *envVec[] = {NULL};
 		if(pipe(fd) == -1)
 		{
@@ -29,7 +38,7 @@ int main(int ac, char **av, char **env)
 		{
 			close(fd[1]);
 			printf("I am a child process %d \n", pid);
-			if(execve(cmd, &av[1], env) == -1)
+			if(execve(cmd, argVec, env) == -1)
 			{
 				perror("Error: Could not execute execve");
 				exit(1);
@@ -38,6 +47,6 @@ int main(int ac, char **av, char **env)
 		wait(NULL);
 		printf("I am a parent process %d \n", pid);
 		exit (1);
-	}
+	//}
 	return 0;
 }
