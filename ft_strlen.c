@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 08:23:13 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/03/17 14:05:01 by iel-moha         ###   ########.fr       */
+/*   Created: 2021/11/07 11:09:48 by iel-moha          #+#    #+#             */
+/*   Updated: 2022/03/17 11:08:51 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pipex.h"
 
-#ifndef PIPEX_H
-# define PIPEX_H
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <fcntl.h>
-
-char	**ft_split(char const *s, char c);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *s);
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+/*int main()
+{
+	char *s = "imane";
+	printf("%zu\n", ft_strlen(s));
+}*/
