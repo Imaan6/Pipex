@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 08:23:00 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/03/31 16:17:01 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/03/31 18:59:39 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,26 @@ void cmd_execution(char *av,char **env)
 	perror("Command not found.\n");
 }
 
+void child_p1(int *fd, char **env,char *av, char *txt)
+{
+	int file;
+	close(fd[0]);
+	file = open(txt, O_RDONLY, 0777);
+	error_handling(file, "File could not open");
+	error_handling(dup2(fd[1],1 ), "Dup2 failed");
+	error_handling(dup2(file, 0), "Dup2 failed");
+	cmd_execution(av, env);
+}
+void child_p2(int *fd, char **env,char *av, char *txt)
+{
+	int file;
+	close(fd[1]);
+	file = open(txt, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	error_handling(file, "File could not open");
+	error_handling(dup2(file, 1), "Dup2 failed");
+	error_handling(dup2(fd[0], 0), "Dup2 failed.");
+	cmd_execution(av, env);
+}
 int main(int ac, char **av, char **env)
 {
 	if (ac == 5)
@@ -90,23 +110,19 @@ int main(int ac, char **av, char **env)
 		error_handling(pid[0], "Could not fork");
 		if(pid[0] == 0)
 		{
-			close(fd[0]);
-			file[0] = open(av[1], O_RDONLY, 0777);
-			error_handling(file[0], "File could not open");
-			error_handling(dup2(fd[1], 1), "Dup2 failed");
-			error_handling(dup2(file[0], 0), "Dup2 failed");
-			cmd_execution(av[2], env);
+			child_p1(fd, env, av[2], av[1]);
+			// close(fd[0]);
+			// file[0] = open(av[1], O_RDONLY, 0777);
+			// error_handling(file[0], "File could not open");
+			// error_handling(dup2(fd[1],1 ), "Dup2 failed");
+			// error_handling(dup2(file[0], 0), "Dup2 failed");
+			// cmd_execution(av[2], env);
 		}
 		pid[1] = fork();
 		error_handling(pid[1], "Could not second fork");
 		if(pid[1] == 0)
 		{	
-			close(fd[1]);
-			file[1] = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-			error_handling(file[1], "File could not open");
-			error_handling(dup2(file[1], 1), "Dup2 failed");
-			error_handling(dup2(fd[0], 0), "Dup2 failed.");
-			cmd_execution(av[3], env);
+			child_p1(fd, env, av[3], av[4]);
 		}
 		close(fd[0]);
 		close(fd[1]);
