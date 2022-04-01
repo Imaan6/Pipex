@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 08:23:00 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/03/31 18:59:39 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/04/01 09:16:05 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int main(int ac, char **av, char **env)
 		error_handling(pid[1], "Could not second fork");
 		if(pid[1] == 0)
 		{	
-			child_p1(fd, env, av[3], av[4]);
+			child_p2(fd, env, av[3], av[4]);
 		}
 		close(fd[0]);
 		close(fd[1]);
