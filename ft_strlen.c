@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 11:09:48 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/04/01 09:28:35 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:46:38 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ void	error_handling(int i, char *str)
 
 void	ft_free(char **str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	while (*str)
 	{
-		free(str[i]);
-		i++;
+		free(*str);
+		str++;
 	}
 	free(*str);
 }
