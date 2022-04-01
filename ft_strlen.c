@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 11:09:48 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/03/17 11:08:51 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/04/01 09:28:35 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,25 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-/*int main()
+
+void	error_handling(int i, char *str)
 {
-	char *s = "imane";
-	printf("%zu\n", ft_strlen(s));
-}*/
+	if (i == -1)
+	{
+		perror(str);
+		exit(1);
+	}	
+}
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(*str);
+}
