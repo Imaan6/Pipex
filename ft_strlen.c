@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 11:09:48 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/04/01 16:46:38 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/04/01 20:18:37 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ void	error_handling(int i, char *str)
 	if (i == -1)
 	{
 		perror(str);
+		exit(1);
+	}	
+}
+
+void	error_handling2(int i, int errno)
+{
+	if (i == -1)
+	{
+		strerror(errno);
 		exit(1);
 	}	
 }

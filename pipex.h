@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 08:23:13 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/04/01 16:02:48 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/04/01 20:19:22 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	error_handling(int i, char *str);
 void	ft_free(char **str);
+void	error_handling2(int i, int errno);
 
 #endif
